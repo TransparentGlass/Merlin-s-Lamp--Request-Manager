@@ -326,7 +326,7 @@
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
-                <widget class="QComboBox" name="comboBox_Priority">
+                <widget class="QComboBox" name="comboBox_SortPriority">
                  <property name="placeholderText">
                   <string>Priority</string>
                  </property>
@@ -348,7 +348,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_Request">
+                <widget class="QComboBox" name="comboBox_SortRequest">
                  <property name="placeholderText">
                   <string>Request</string>
                  </property>
@@ -380,7 +380,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_Status">
+                <widget class="QComboBox" name="comboBox_SortStatus">
                  <property name="placeholderText">
                   <string>Status</string>
                  </property>
@@ -506,8 +506,12 @@
                          <widget class="QLabel" name="label_request_title">
                           <property name="font">
                            <font>
+                            <family>:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf</family>
                             <pointsize>24</pointsize>
                            </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">font-family: url(:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf)</string>
                           </property>
                           <property name="text">
                            <string>Title</string>
@@ -860,6 +864,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../style/rsc.qrc"/>
+ </resources>
  <connections/>
 </ui>

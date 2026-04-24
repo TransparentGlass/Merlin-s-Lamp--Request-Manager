@@ -1,0 +1,52 @@
+from PyQt6 import uic
+from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
+
+from load_font import load_font
+
+class MyWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi(r"src\merlins_lamp.ui", self)
+        
+        self.pushButton_add_request.clicked.connect(self.add_request)
+        self.comboBox_SortPriority.currentTextChanged.connect(self.sort_Priority)
+        self.comboBox_SortStatus.currentTextChanged.connect(self.sort_Status)
+        self.comboBox_SortRequest.currentTextChanged.connect(self.sort_RequestType)
+        
+    def add_request(self):
+        print("You are clicking request")
+        dialog = QDialog(self)
+        
+        uic.loadUi(r"src\Submit_request_form.ui", dialog)
+        result = dialog.exec() 
+    
+        if result == QDialog.DialogCode.Accepted:
+            print("User clicked OK/Submit")
+        
+    
+    def sort_Priority(self):
+        print("You're moving sort right now")
+        
+    def sort_RequestType(self):
+        print("you're sorting to request type")
+        return
+    
+    def sort_Status(self):
+        print("You're sorting to status")
+        return
+    
+        
+        
+        
+        
+        
+# load_font()
+app = QApplication([])
+
+with open("style\main.qss", "r") as f:
+    style = f.read()
+    app.setStyleSheet(style)
+    
+window = MyWindow()
+window.show()
+app.exec()
