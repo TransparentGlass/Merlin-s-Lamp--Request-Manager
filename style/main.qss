@@ -4,6 +4,10 @@ QWidget {
     font-family: "Roboto";
 }
 
+QPushButton{
+    background-color: #660708;
+}
+
 #frame_request QFrame{
     background-color: #0B090A;
     
