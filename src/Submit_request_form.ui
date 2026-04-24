@@ -36,7 +36,7 @@
        <number>25</number>
       </property>
       <item>
-       <widget class="QLineEdit" name="lineEdit_2">
+       <widget class="QLineEdit" name="lineEdit_Title">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -47,6 +47,9 @@
          <font>
           <pointsize>40</pointsize>
          </font>
+        </property>
+        <property name="maxLength">
+         <number>100</number>
         </property>
         <property name="placeholderText">
          <string>Title here...</string>
@@ -81,7 +84,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="comboBox_requestType">
            <item>
             <property name="text">
              <string>Request Type</string>
@@ -134,7 +137,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="lineEdit_content">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>0</horstretch>

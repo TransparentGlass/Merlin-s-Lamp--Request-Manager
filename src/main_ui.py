@@ -1,8 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
-
-from load_font import load_font
-
+from request_submission import RequestSubmission
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -15,9 +13,7 @@ class MyWindow(QMainWindow):
         
     def add_request(self):
         print("You are clicking request")
-        dialog = QDialog(self)
-        
-        uic.loadUi(r"src\Submit_request_form.ui", dialog)
+        dialog = RequestSubmission(self)    
         result = dialog.exec() 
     
         if result == QDialog.DialogCode.Accepted:
