@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="font">
+    <file>font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf</file>
+  </qresource>
+</RCC>

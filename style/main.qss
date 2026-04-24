@@ -1,0 +1,37 @@
+QWidget {
+    background-color: #161A1D;
+    color: #F5F3F4;
+    font-family: "Roboto";
+}
+
+#frame_request QFrame{
+    background-color: #0B090A;
+    
+}
+
+#frame_request{
+    padding: 20%;
+    background-color: #0B090A;
+}
+
+#frame_reqType{
+    padding-left: 5px;
+    margin-bottom: 10%;
+}
+
+#frame_reqType QFrame{
+    background-color: #660708;
+    border-radius: 3px;
+}
+
+#label_content{
+    margin-top: 10%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#label_request_title {
+    color: #BA181B;
+    font-size: 50px;
+}
+
