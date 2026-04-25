@@ -4,7 +4,7 @@ from request_submission import RequestSubmission
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi(r"src\merlins_lamp.ui", self)
+        uic.loadUi(r"ui\merlins_lamp.ui", self)
         
         self.pushButton_add_request.clicked.connect(self.add_request)
         self.comboBox_SortPriority.currentTextChanged.connect(self.sort_Priority)
@@ -39,7 +39,7 @@ class MyWindow(QMainWindow):
 # load_font()
 app = QApplication([])
 
-with open("style\main.qss", "r") as f:
+with open(r"style\main.qss", "r") as f:
     style = f.read()
     app.setStyleSheet(style)
     
