@@ -1,5 +1,4 @@
 from PyQt6.QtWidgets import QFrame
-from Request_template import RequestQFrame
 
 class Request:
     def __init__(self, title, request_type, content, date, author, requestID = None, parent = None):

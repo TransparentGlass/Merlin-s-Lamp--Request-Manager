@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>851</width>
+    <width>876</width>
     <height>662</height>
    </rect>
   </property>
@@ -489,6 +489,12 @@
                      </property>
                      <item>
                       <widget class="QFrame" name="frame_28">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
                        <property name="minimumSize">
                         <size>
                          <width>0</width>
@@ -504,6 +510,12 @@
                        <layout class="QVBoxLayout" name="verticalLayout_29">
                         <item>
                          <widget class="QLabel" name="label_request_title">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
                           <property name="font">
                            <font>
                             <family>:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf</family>
@@ -514,7 +526,7 @@
                            <string notr="true">font-family: url(:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf)</string>
                           </property>
                           <property name="text">
-                           <string>This is my fucking title and you're going to like it lil bitch aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+                           <string>This is my fucking title and you're going to like it lil bitch</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
@@ -860,7 +872,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>851</width>
+     <width>876</width>
      <height>22</height>
     </rect>
    </property>

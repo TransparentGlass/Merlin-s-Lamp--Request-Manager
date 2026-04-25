@@ -137,7 +137,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="textEdit_content">
         <property name="readOnly">
          <bool>false</bool>
         </property>
