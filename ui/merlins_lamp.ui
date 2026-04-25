@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>815</width>
+    <width>851</width>
     <height>662</height>
    </rect>
   </property>
@@ -241,8 +241,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>777</width>
-             <height>581</height>
+             <width>846</width>
+             <height>564</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -514,10 +514,13 @@
                            <string notr="true">font-family: url(:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf)</string>
                           </property>
                           <property name="text">
-                           <string>Title</string>
+                           <string>This is my fucking title and you're going to like it lil bitch aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                          </property>
+                          <property name="wordWrap">
+                           <bool>true</bool>
                           </property>
                          </widget>
                         </item>
@@ -857,7 +860,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>815</width>
+     <width>851</width>
      <height>22</height>
     </rect>
    </property>
