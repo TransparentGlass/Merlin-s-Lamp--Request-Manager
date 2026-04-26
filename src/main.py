@@ -1,6 +1,9 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
 from frontend.request_submission import RequestSubmission
+from backend.Request import Request
+from backend.database import databaseManager
+from frontend.request_template import requestQFrame 
 
 from pathlib import Path
 
@@ -15,10 +18,16 @@ class MyWindow(QMainWindow):
         super().__init__()
         uic.loadUi(UI_DIR/"merlins_lamp.ui", self)
         
+        self.db = databaseManager()
+        self.requests = self.db.fetch_requests()
+        self.load_request(self.requests)
+        
         self.pushButton_add_request.clicked.connect(self.add_request)
         self.comboBox_SortPriority.currentTextChanged.connect(self.sort_Priority)
         self.comboBox_SortStatus.currentTextChanged.connect(self.sort_Status)
         self.comboBox_SortRequest.currentTextChanged.connect(self.sort_RequestType)
+        
+        
         
     def add_request(self):
         print("You are clicking request")
@@ -27,6 +36,14 @@ class MyWindow(QMainWindow):
     
         if result == QDialog.DialogCode.Accepted:
             print("User clicked OK/Submit")
+            
+    def load_request(self, request: list[Request]):
+        requests_frame = self.frame_allRequests.layout()
+        for r in request:
+            widget = requestQFrame(r, self)
+            requests_frame.addWidget(widget)
+            
+            
         
     
     def sort_Priority(self):

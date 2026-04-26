@@ -14,9 +14,11 @@ class requestQFrame(QFrame):
     def __init__(self, request: Request, parent = None):
         super().__init__(parent)
         uic.loadUi(UI_DIR / "request_template.ui", self)
-        self.label_date.setText(request.date)
+        
+    
+        self.label_date.setText(request.formatted_date)
         self.label_request_user.setText(request.author)
-        self.label_requestID.setText(request.requestID)
+        self.label_requestID.setText(str(request.requestID))
         self.label_request_title.setText(request.title)
         self.label_request_type.setText(request.request_type)
         self.label_content.setText(request.content)
