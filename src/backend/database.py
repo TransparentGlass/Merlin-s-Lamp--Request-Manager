@@ -1,6 +1,8 @@
 from PyQt6.QtSql import QSqlDatabase, QSqlQuery
 import mysql.connector
-from backend.Request import Request
+from backend.Request import Request, StatusType, Priority
+import bcrypt
+
 
 
 class databaseManager:
@@ -72,26 +74,92 @@ class databaseManager:
     ##TODO: fetch request and show them, place them in a frame, update priority and status if edited by an admin
     
     def fetch_requests(self) -> list[Request]:
-        query = "SELECT * from requests limit 10"
+        query = "SELECT requests.* from requests limit 10"
         requests = self.fetch_data(query)
+        if not requests:
+            print("Fetch request is empty")
+            return None
         
         request_list = []
         for r in requests:
-            newRequest = Request(r.get('title'), r.get('request_type'), r.get('content'), r.get('date'), self.fetch_username(r.get('user_id')), r.get('id'))
+            newRequest = Request(r.get('title'), 
+                                 r.get('request_type'),
+                                 r.get('priority'),
+                                 r.get('status'),
+                                 r.get('content'),
+                                 r.get('date'),
+                                 r.get('user_id'),
+                                 r.get('id'))
             request_list.append(newRequest)
             print(f"added request #{r}")
             
         return request_list if request_list else None
+    
+
             
     def fetch_username(self, user_id) -> str:
         query = "Select (user_name) from users WHERE user_id = %s"
         params = (user_id, )
         result = self.fetch_one(query, params)
         return str(result['user_name']) if result else ""
+    
+    def update_priority(self, req_id: int, priority: Priority) -> bool:
+        query = "UPDATE requests SET priority = %s WHERE id = %s"
+        params = (priority.value, req_id)
         
+        try:
+            self.execute_query(query, params)
+            return True
+        except Exception as e:
+            print(f"Stoic Error: Database update failed: {e}")
+            return False
+    
+    def update_status(self,req_id: int, status: StatusType) -> bool:
+        query = "UPDATE requests SET status = %s WHERE id = %s"
+        params = (status.value, req_id)
+        
+        try:
+            self.execute_query(query, params)
+            return True
+        except Exception as e:
+            print(f"Stoic Error: Database update failed: {e}")
+            return False
 
-
-            
+    def userRegister(self, username, password) -> bool:
+        query = "Select 1 FROM users where user_name = %s limit 1"
+        param = (username, )
+        if self.fetch_one(query, param):
+            print("user exists, try another name to register")
+            return False
+        
+        newpassword = password.encode('utf-8')
+        hashed = bcrypt.hashpw(newpassword, bcrypt.gensalt()).decode('utf-8')
+        
+        query = "INSERT INTO users (user_name, password_hash) values (%s, %s)"
+        param = (username, hashed)
+        if self.execute_query(query, param):
+            print(f"Successfully signed in as {username}")
+            return True
+        return False
+    
+    def userLogin(self, username, password) -> bool:
+        query = "SELECT password_hash FROM users WHERE user_name = %s LIMIT 1"
+        param = (username,)
+        
+        result = self.fetch_one(query, param)
+        if not result:
+            print("Login failed: User does not exist")
+            return False
+        
+        stored_hash = result["password_hash"]
+        
+        if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
+            print(f"Welcome back, {username}!")
+            return True
+        else:
+            print("Login failed: Incorrect password.")
+            return False
+        
 # db = databaseManager()
 # db.fetch_requests()
 

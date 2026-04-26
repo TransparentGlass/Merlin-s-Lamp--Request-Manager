@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>750</width>
-    <height>321</height>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -272,13 +272,6 @@
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
-             <widget class="QLabel" name="label_requestID">
-              <property name="text">
-               <string>Request ID</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QComboBox" name="comboBox_AdminPriority">
               <property name="enabled">
                <bool>true</bool>
@@ -311,7 +304,7 @@
               </item>
               <item>
                <property name="text">
-                <string>Middle</string>
+                <string>Medium</string>
                </property>
               </item>
               <item>
@@ -344,6 +337,13 @@
                 <string>Finished</string>
                </property>
               </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_requestID">
+              <property name="text">
+               <string>Request ID</string>
+              </property>
              </widget>
             </item>
            </layout>
