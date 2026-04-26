@@ -183,9 +183,9 @@
                       </property>
                       <layout class="QHBoxLayout" name="horizontalLayout">
                        <item>
-                        <widget class="QPushButton" name="pushButton_userSignIn">
+                        <widget class="QPushButton" name="pushButton_userLogIn">
                          <property name="text">
-                          <string>User Sign in</string>
+                          <string>User Log in</string>
                          </property>
                         </widget>
                        </item>

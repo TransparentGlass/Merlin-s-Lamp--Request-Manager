@@ -19,17 +19,24 @@ class requestQFrame(QFrame):
         self.db = databaseManager()
         self.request = request
         self.label_date.setText(request.formatted_date)
-        self.label_request_user.setText(request.author)
+        self.label_request_user.setText(self.db.fetch_username(request.authorID))
         self.label_requestID.setText(str(request.requestID))
         self.label_request_title.setText(request.title)
         self.label_request_type.setText(request.request_type)
         self.label_content.setText(request.content)
         
         self.comboBox_AdminPriority.blockSignals(True)
-        index = self.comboBox_AdminPriority.findText(request.priority.value)
+        if request.priority is not None:
+            index = self.comboBox_AdminPriority.findText(request.priority)
+        else:
+            index = -1
         self.comboBox_AdminPriority.setCurrentIndex(index)
         
-        status_index = self.comboBox_AdminStatus.findText(request.status.value)
+        if request.status is not None:
+            status_index = self.comboBox_AdminStatus.findText(request.status)
+        else:
+            status_index = -1
+            
         self.comboBox_AdminStatus.setCurrentIndex(status_index)
         self.comboBox_AdminPriority.blockSignals(False)
         

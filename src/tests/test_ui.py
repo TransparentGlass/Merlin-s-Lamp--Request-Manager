@@ -30,7 +30,7 @@ def test_request_template_init(qtbot, sample_requests):
     assert widget.comboBox_AdminStatus.currentText() == sample_requests.status.value
     
 def test_request_template_updatePrio(qtbot, sample_requests, db_manager):
-    widget = requestQFrame(sample_requests)
+    widget = requestQFrame(sample_requests,)
     qtbot.addWidget(widget)
     widget.show()
     qtbot.wait(10000)

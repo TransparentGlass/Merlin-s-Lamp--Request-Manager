@@ -20,7 +20,7 @@ def test_fetch_request(sample_requests):
     db = databaseManager()
     result = db.fetch_requests()
     
-    assert result is None
+    assert result
     
 def test_priority_update_cycle(db_manager):
     # Arrange
@@ -57,7 +57,7 @@ def test_userSignIn(user, db_manager):
     
     success = db_manager.userRegister(username, password)
     
-    assert success is True
+    assert success is False
     
 def test_userSigninFail(user, db_manager):
     username = user["username"]

@@ -66,9 +66,9 @@ class databaseManager:
                 cursor.close()
                 conn.close()
         
-    def submit_request(self, title, content, request_type, user_id = None) -> bool:
+    def submit_request(self, title, content, request_type, username) -> bool:
         query = "INSERT INTO requests (title, content, request_type, user_id) VALUES (%s,%s,%s,%s)"
-        params = (title, content, request_type, user_id)
+        params = (title, content, request_type, self.fetch_user_id(username))
         return self.execute_query(query, params)
     
     ##TODO: fetch request and show them, place them in a frame, update priority and status if edited by an admin
@@ -102,6 +102,13 @@ class databaseManager:
         params = (user_id, )
         result = self.fetch_one(query, params)
         return str(result['user_name']) if result else ""
+    
+    def fetch_user_id(self, username) -> int:
+        query = "Select (user_id) from users WHERE user_name = %s limit 1"
+        params = (username, )
+        result = self.fetch_one(query, params)
+        return int(result['user_id']) if result else None
+        
     
     def update_priority(self, req_id: int, priority: Priority) -> bool:
         query = "UPDATE requests SET priority = %s WHERE id = %s"

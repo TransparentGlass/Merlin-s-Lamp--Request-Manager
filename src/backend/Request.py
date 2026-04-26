@@ -21,7 +21,7 @@ class Request:
     status: StatusType
     content: str
     date: datetime
-    author: str
+    authorID: int
     requestID: int = None
     
     @property

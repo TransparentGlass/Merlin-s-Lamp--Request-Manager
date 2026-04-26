@@ -22,8 +22,9 @@ class MyWindow(QMainWindow):
         self.db = databaseManager()
         self.requests = self.db.fetch_requests()
         
-        self.pushButton_userSignIn.clicked.connect(self.userSignIn)
-        self.pushButton_AdminSignIn.clicked.connect(self.adminSignIn)
+        self.pushButton_userLogIn.clicked.connect(self.userLogIn)
+        self.pushButton_AdminSignIn.clicked.connect(self.adminLogin)
+        self.pushButton_register.clicked.connect(self.userRegister)
         
         
         self.pushButton_add_request.clicked.connect(self.add_request)
@@ -33,17 +34,30 @@ class MyWindow(QMainWindow):
         self.update_requests()
          
          
-    def userSignIn(self) -> bool:
+    def userRegister(self) -> bool:
         self.username = self.lineEdit_username.text()
         self.password = self.lineEdit_password.text()
+        if self.db.userRegister(self.username, self.password):
+            print("Successfully registered. Log in to account")
+            return True
         
-        if self.username and self.password:
-            print("success")
-            
+        return False
+    
+    def userLogIn(self) -> bool:
+        self.username = self.lineEdit_username.text()
+        self.password = self.lineEdit_password.text()
+        if self.db.userLogin(self.username, self.password):
+            print(f"welcome {self.username}")
+            self.stackedWidget.setCurrentIndex(1)
+            return True
+        
+        return False
+    
+    def adminLogin(self): pass
             
     def add_request(self):
         print("You are clicking request")
-        dialog = RequestSubmission(self)    
+        dialog = RequestSubmission(self.username, self)    
         result = dialog.exec() 
     
         if result == QDialog.DialogCode.Accepted:

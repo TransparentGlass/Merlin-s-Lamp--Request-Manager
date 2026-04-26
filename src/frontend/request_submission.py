@@ -10,11 +10,11 @@ ROOT_DIR = SRC_DIR.parent
 UI_DIR = ROOT_DIR / "ui"
 
 class RequestSubmission(QDialog):
-    def __init__(self, parent = None):
+    def __init__(self, username, parent = None):
         super().__init__(parent)
         uic.loadUi(UI_DIR/ "Submit_request_form.ui", self)
         self.db = databaseManager()
-        
+        self.username = username
         self.pushButton_submit.clicked.connect(self.validate_and_submit)
         self.pushButton_cancel.clicked.connect(self.reject)
         
@@ -26,14 +26,16 @@ class RequestSubmission(QDialog):
         
         
         if content and title and req_type.activated:
-            if self.db.submit_request(title, content, req_type.currentText()):
+            if self.db.submit_request(title, content, req_type.currentText(), self.username):
                 print("Submitted successfully!")
+                self.accept()
                 
             else: 
                 print("Submitted unsuccessfully")
+                self.reject()
                 
                 
-            self.accept()
+            
             
         
         else:
