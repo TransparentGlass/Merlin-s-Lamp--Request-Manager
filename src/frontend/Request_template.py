@@ -20,7 +20,7 @@ class requestQFrame(QFrame):
         self.request = request
         self.label_date.setText(request.formatted_date)
         self.label_request_user.setText(self.db.fetch_username(request.authorID))
-        self.label_requestID.setText(str(request.requestID))
+        self.label_requestID.setText(f"Request #{str(request.requestID)}")
         self.label_request_title.setText(request.title)
         self.label_request_type.setText(request.request_type)
         self.label_content.setText(request.content)
