@@ -1,6 +1,6 @@
 from PyQt6.QtSql import QSqlDatabase, QSqlQuery
 import mysql.connector
-import Request as Request
+from backend.Request import Request
 
 
 class databaseManager:
@@ -71,15 +71,15 @@ class databaseManager:
     
     ##TODO: fetch request and show them, place them in a frame, update priority and status if edited by an admin
     
-    def fetch_requests(self):
+    def fetch_requests(self) -> list[Request]:
         query = "SELECT * from requests limit 10"
         requests = self.fetch_data(query)
         
         request_list = []
         for r in requests:
-            newRequest = Request.Request(r.get('title'), r.get('request_type'), r.get('content'), r.get('date'), self.fetch_username(r.get('user_id')), r.get('id'))
+            newRequest = Request(r.get('title'), r.get('request_type'), r.get('content'), r.get('date'), self.fetch_username(r.get('user_id')), r.get('id'))
             request_list.append(newRequest)
-            print(f"added request #{r.get('id')}")
+            print(f"added request #{r}")
             
         return request_list if request_list else None
             
@@ -92,10 +92,10 @@ class databaseManager:
 
 
             
-db = databaseManager()
-db.fetch_requests()
+# db = databaseManager()
+# db.fetch_requests()
 
-print(f"Username: {db.fetch_username('1')}")
+# print(f"Username: {db.fetch_username('1')}")
         
         
         

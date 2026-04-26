@@ -1,10 +1,19 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
 from frontend.request_submission import RequestSubmission
+
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+# outside src
+ROOT_DIR = ROOT.parent
+UI_DIR = ROOT_DIR / "ui"
+QSS_PATH = ROOT_DIR / "style" / "main.qss"
+
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi(r"ui\merlins_lamp.ui", self)
+        uic.loadUi(UI_DIR/"merlins_lamp.ui", self)
         
         self.pushButton_add_request.clicked.connect(self.add_request)
         self.comboBox_SortPriority.currentTextChanged.connect(self.sort_Priority)
@@ -39,7 +48,7 @@ class MyWindow(QMainWindow):
 # load_font()
 app = QApplication([])
 
-with open(r"style\main.qss", "r") as f:
+with open(QSS_PATH, "r") as f:
     style = f.read()
     app.setStyleSheet(style)
     
