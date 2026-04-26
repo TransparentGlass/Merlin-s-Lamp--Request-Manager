@@ -1,6 +1,6 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
-from request_submission import RequestSubmission
+from frontend.request_submission import RequestSubmission
 class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()

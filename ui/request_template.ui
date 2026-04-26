@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>772</width>
+    <width>750</width>
     <height>394</height>
    </rect>
   </property>
@@ -58,6 +58,12 @@
          </property>
          <item>
           <widget class="QFrame" name="frame_28">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -73,20 +79,32 @@
            <layout class="QVBoxLayout" name="verticalLayout_29">
             <item>
              <widget class="QLabel" name="label_request_title">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="font">
                <font>
                 <family>:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf</family>
-                <pointsize>24</pointsize>
+                <pointsize>16</pointsize>
                </font>
               </property>
               <property name="styleSheet">
                <string notr="true">font-family: url(:/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf)</string>
               </property>
               <property name="text">
-               <string>Title</string>
+               <string notr="true">This is my title, and nobody can take it away from me you bunch of fucking pricks</string>
+              </property>
+              <property name="scaledContents">
+               <bool>false</bool>
               </property>
               <property name="alignment">
                <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -98,7 +116,7 @@
               <property name="frameShadow">
                <enum>QFrame::Shadow::Raised</enum>
               </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <layout class="QHBoxLayout" name="horizontalLayout">
                <property name="spacing">
                 <number>8</number>
                </property>
@@ -107,6 +125,12 @@
                </property>
                <item>
                 <widget class="QLabel" name="label_request_user">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
                   <string>User</string>
                  </property>
@@ -134,7 +158,7 @@
             <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+            <enum>QSizePolicy::Policy::Ignored</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -148,7 +172,7 @@
           <widget class="QFrame" name="frame_13">
            <property name="minimumSize">
             <size>
-             <width>60</width>
+             <width>90</width>
              <height>0</height>
             </size>
            </property>
