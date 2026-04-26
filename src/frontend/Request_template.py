@@ -1,13 +1,19 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication, QFrame
 from backend.Request import Request
-from backend.database import databaseManager
+from pathlib import Path
 
+
+CURRENT_DIR = Path(__file__).resolve().parent
+SRC_DIR = CURRENT_DIR.parent
+BACK_DIR = SRC_DIR/"backend"
+ROOT_DIR = SRC_DIR.parent
+UI_DIR = ROOT_DIR / "ui"
 
 class requestQFrame(QFrame):
     def __init__(self, request: Request, parent = None):
-        super().__init__()
-        uic.loadUi(r"ui\request_template.ui", self)
+        super().__init__(parent)
+        uic.loadUi(UI_DIR / "request_template.ui", self)
         self.label_date.setText(request.date)
         self.label_request_user.setText(request.author)
         self.label_requestID.setText(request.requestID)
@@ -17,14 +23,7 @@ class requestQFrame(QFrame):
 
         
         
-app = QApplication([])     
-db = databaseManager()
-result = db.fetch_requests()
-for r in result:
-    frame = requestQFrame(r)
-    frame.show()
-    
-app.exec()
+
         
         
         
