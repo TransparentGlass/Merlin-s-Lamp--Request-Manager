@@ -19,8 +19,7 @@ class MyWindow(QMainWindow):
         uic.loadUi(UI_DIR/"merlins_lamp.ui", self)
         
         self.db = databaseManager()
-        self.requests = self.db.fetch_requests()
-        self.load_request(self.requests)
+        self.update_requests()
         
         self.pushButton_add_request.clicked.connect(self.add_request)
         self.comboBox_SortPriority.currentTextChanged.connect(self.sort_Priority)
@@ -36,15 +35,30 @@ class MyWindow(QMainWindow):
     
         if result == QDialog.DialogCode.Accepted:
             print("User clicked OK/Submit")
+            self.update_requests()
             
-    def load_request(self, request: list[Request]):
+            
+        
+            
+            
+    def load_request(self):
         requests_frame = self.frame_allRequests.layout()
-        for r in request:
+        for r in self.requests:
             widget = requestQFrame(r, self)
             requests_frame.addWidget(widget)
             
             
+    def update_requests(self):
+        self.requests = self.db.fetch_requests()
+        self.clear_layout()
+        self.load_request()
         
+    def clear_layout(self):
+        layout = self.frame_allRequests.layout()
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
     
     def sort_Priority(self):
         print("You're moving sort right now")
