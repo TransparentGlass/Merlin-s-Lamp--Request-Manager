@@ -8,9 +8,9 @@ class StatusType(Enum):
     FINISHED = "Finished"
     
 class Priority(Enum):
-    LOW = "Low"
-    MEDIUM = "Medium"
-    HIGH = "High"
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
     UNDEFINED = None
     
 @dataclass

@@ -26,22 +26,25 @@ class requestQFrame(QFrame):
         self.label_content.setText(request.content)
         
         self.comboBox_AdminPriority.blockSignals(True)
-        if request.priority is not None:
-            index = self.comboBox_AdminPriority.findText(request.priority)
+        self.comboBox_AdminStatus.blockSignals(True)
+        
+        if self.request.priority is not None:
+            index = self.comboBox_AdminPriority.findText(self.request.priority)
+            self.comboBox_AdminPriority.setCurrentIndex(index)
         else:
             index = -1
-        self.comboBox_AdminPriority.setCurrentIndex(index)
         
         if request.status is not None:
-            status_index = self.comboBox_AdminStatus.findText(request.status)
+            status_index = self.comboBox_AdminStatus.findText(self.request.status)
+            self.comboBox_AdminStatus.setCurrentIndex(status_index)
         else:
             status_index = -1
-            
-        self.comboBox_AdminStatus.setCurrentIndex(status_index)
+        
         self.comboBox_AdminPriority.blockSignals(False)
+        self.comboBox_AdminStatus.blockSignals(False)
         
         self.comboBox_AdminPriority.currentTextChanged.connect(self.updatePriority)
-        self.comboBox_AdminStatus.currentTextChanged.connect(self.updatePriority)
+        self.comboBox_AdminStatus.currentTextChanged.connect(self.updateStatus)
         
     def updatePriority(self):
         try:
@@ -52,6 +55,16 @@ class requestQFrame(QFrame):
         
         except ValueError:
             print(f"Priority is not a valid Enum: {ValueError}")
+            
+    def updateStatus(self):
+        try:
+            newStatus = StatusType(self.comboBox_AdminStatus.currentText())
+            self.request.status = newStatus
+            self.db.update_status(self.request.requestID, newStatus)
+            print(f"Object Updated: ID {self.request.requestID} is now {newStatus}")
+        
+        except ValueError:
+            print(f"Status is not a valid Enum: {ValueError}")
         
         
         

@@ -108,10 +108,10 @@ class databaseManager:
         params = (username, )
         result = self.fetch_one(query, params)
         return int(result['user_id']) if result else None
-        
+
     
     def update_priority(self, req_id: int, priority: Priority) -> bool:
-        query = "UPDATE requests SET priority = %s WHERE id = %s"
+        query = "UPDATE requests SET priority = %s WHERE id = %s limit 1"
         params = (priority.value, req_id)
         
         try:
@@ -122,7 +122,7 @@ class databaseManager:
             return False
     
     def update_status(self,req_id: int, status: StatusType) -> bool:
-        query = "UPDATE requests SET status = %s WHERE id = %s"
+        query = "UPDATE requests SET status = %s WHERE id = %s limit 1"
         params = (status.value, req_id)
         
         try:

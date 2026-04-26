@@ -17,7 +17,7 @@ class MyWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi(UI_DIR/"merlins_lamp.ui", self)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         
         self.db = databaseManager()
         self.requests = self.db.fetch_requests()
