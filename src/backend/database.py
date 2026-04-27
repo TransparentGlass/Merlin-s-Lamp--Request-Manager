@@ -70,12 +70,32 @@ class databaseManager:
         query = "INSERT INTO requests (title, content, request_type, user_id) VALUES (%s,%s,%s,%s)"
         params = (title, content, request_type, self.fetch_user_id(username))
         return self.execute_query(query, params)
+
     
-    ##TODO: fetch request and show them, place them in a frame, update priority and status if edited by an admin
-    
-    def fetch_requests(self) -> list[Request]:
-        query = "SELECT requests.* from requests limit 10"
-        requests = self.fetch_data(query)
+    def fetch_requests(self, filter_prio = None, filter_status = None, filter_type = None) -> list[Request]:
+        base_query = "SELECT * from requests"
+        params = []
+
+        active_filters = {}
+        if filter_prio:
+            active_filters['priority'] = filter_prio
+        if filter_status:
+            active_filters['status'] = filter_status
+        if filter_type:
+            active_filters['request_type'] = filter_type
+            
+            
+        if not active_filters:
+            # THE "NO FILTERS" STATE: Just run the base query
+            final_query = base_query
+        else:
+            # Build the WHERE clause dynamically
+            conditions = [f"{column} = %s" for column in active_filters.keys()]
+            final_query = f"{base_query} WHERE {' AND '.join(conditions)}"
+            params = list(active_filters.values())
+            
+        requests = self.fetch_data(final_query, params)
+        
         if not requests:
             print("Fetch request is empty")
             return None
@@ -84,8 +104,8 @@ class databaseManager:
         for r in requests:
             newRequest = Request(r.get('title'), 
                                  r.get('request_type'),
-                                 r.get('priority'),
-                                 r.get('status'),
+                                 Priority[r.get('priority')],
+                                 StatusType[r.get('status')],
                                  r.get('content'),
                                  r.get('date'),
                                  r.get('user_id'),
@@ -112,7 +132,7 @@ class databaseManager:
     
     def update_priority(self, req_id: int, priority: Priority) -> bool:
         query = "UPDATE requests SET priority = %s WHERE id = %s limit 1"
-        params = (priority.value, req_id)
+        params = (priority.name, req_id)
         
         try:
             self.execute_query(query, params)
@@ -123,7 +143,7 @@ class databaseManager:
     
     def update_status(self,req_id: int, status: StatusType) -> bool:
         query = "UPDATE requests SET status = %s WHERE id = %s limit 1"
-        params = (status.value, req_id)
+        params = (status.name, req_id)
         
         try:
             self.execute_query(query, params)

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
+    <width>748</width>
     <height>339</height>
    </rect>
   </property>
@@ -24,7 +24,7 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>0</width>
+       <width>730</width>
        <height>0</height>
       </size>
      </property>
@@ -298,6 +298,12 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
@@ -315,7 +321,12 @@
               </property>
               <item>
                <property name="text">
-                <string>HIGH</string>
+                <string>UNDEFINED</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>LOW</string>
                </property>
               </item>
               <item>
@@ -325,7 +336,7 @@
               </item>
               <item>
                <property name="text">
-                <string>LOW</string>
+                <string>HIGH</string>
                </property>
               </item>
              </widget>
@@ -334,6 +345,12 @@
              <widget class="QComboBox" name="comboBox_AdminStatus">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>75</width>
+                <height>0</height>
+               </size>
               </property>
               <property name="placeholderText">
                <string>Status</string>
@@ -348,7 +365,7 @@
               </item>
               <item>
                <property name="text">
-                <string>On-going</string>
+                <string>Working</string>
                </property>
               </item>
               <item>
@@ -469,6 +486,12 @@
       </item>
       <item>
        <widget class="QLabel" name="label_content">
+        <property name="minimumSize">
+         <size>
+          <width>710</width>
+          <height>68</height>
+         </size>
+        </property>
         <property name="text">
          <string>Content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec nisl neque. Morbi in mollis nisi. Sed facilisis pellentesque sem lacinia bibendum. Aliquam erat volutpat. Curabitur ut porta justo. Phasellus leo nulla, imperdiet a tincidunt ac, pharetra at felis. Morbi suscipit lacus ut tristique imperdiet. Donec sed aliquam est. Donec congue purus ligula, a congue lorem dignissim at. Praesent blandit massa et nisl scelerisque venenatis sit amet sit amet orci.</string>
         </property>

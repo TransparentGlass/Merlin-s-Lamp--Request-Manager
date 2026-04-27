@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="font">
+    <file>font/Montserrat,Playfair_Display,Roboto/Roboto/Roboto-VariableFont_wdth,wght.ttf</file>
     <file>font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf</file>
   </qresource>
 </RCC>

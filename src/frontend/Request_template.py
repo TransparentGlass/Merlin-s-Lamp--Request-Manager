@@ -29,14 +29,12 @@ class requestQFrame(QFrame):
         self.comboBox_AdminStatus.blockSignals(True)
         
         if self.request.priority is not None:
-            index = self.comboBox_AdminPriority.findText(self.request.priority)
-            self.comboBox_AdminPriority.setCurrentIndex(index)
+            self.comboBox_AdminPriority.setCurrentIndex(self.request.priority.value)
         else:
             index = -1
         
-        if request.status is not None:
-            status_index = self.comboBox_AdminStatus.findText(self.request.status)
-            self.comboBox_AdminStatus.setCurrentIndex(status_index)
+        if self.request.status is not None:
+            self.comboBox_AdminStatus.setCurrentIndex(self.request.status.value)
         else:
             status_index = -1
         
@@ -48,7 +46,7 @@ class requestQFrame(QFrame):
         
     def updatePriority(self):
         try:
-            newPrio = Priority(self.comboBox_AdminPriority.currentText())
+            newPrio = Priority[self.comboBox_AdminPriority.currentText()]
             self.request.priority = newPrio
             self.db.update_priority(self.request.requestID, newPrio)
             print(f"Object Updated: ID {self.request.requestID} is now {newPrio}")
@@ -58,7 +56,7 @@ class requestQFrame(QFrame):
             
     def updateStatus(self):
         try:
-            newStatus = StatusType(self.comboBox_AdminStatus.currentText())
+            newStatus = StatusType[self.comboBox_AdminStatus.currentText()]
             self.request.status = newStatus
             self.db.update_status(self.request.requestID, newStatus)
             print(f"Object Updated: ID {self.request.requestID} is now {newStatus}")

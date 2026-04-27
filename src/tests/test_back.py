@@ -6,11 +6,12 @@ from datetime import datetime
 
 @pytest.fixture
 def sample_requests():
-    return Request("Title test", "Feature", Priority.LOW, StatusType.ONGOING, "Test content", datetime.now(), "AJ", 20)
+    return Request("Title test", "Feature", Priority.LOW, StatusType.Working, "Test content", datetime.now(), "AJ", 20)
 
 @pytest.fixture
 def db_manager():
     return databaseManager()
+
 
 @pytest.fixture
 def user():
@@ -18,9 +19,9 @@ def user():
 
 def test_fetch_request(sample_requests):
     db = databaseManager()
-    result = db.fetch_requests()
-    
-    assert result
+    result = db.fetch_requests("LOW","Working", "Commission")
+    print(result)
+    assert not result
     
 def test_priority_update_cycle(db_manager):
     # Arrange

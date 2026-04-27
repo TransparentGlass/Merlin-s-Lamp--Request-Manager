@@ -1,15 +1,13 @@
 from PyQt6.QtGui import QFontDatabase
 
-def load_font():
-    font_id = QFontDatabase.addApplicationFont("style\font\Playfair_Display\PlayfairDisplay-VariableFont_wght.ttf")
-    if font_id == -1:
-        print("Error: Font could not be loaded!")
-        return
-        
-    # 2. Retrieve the actual font family name (e.g., "Caudex")
-    # A single file can contain multiple families, so it returns a list
+# 1. Register the font from the resource file
+# Note: Ensure you have imported your compiled resources_rc file
+font_id = QFontDatabase.addApplicationFont(":/font/font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf")
+
+# 2. Verify the family name (usually "Playfair Display")
+if font_id != -1:
     families = QFontDatabase.applicationFontFamilies(font_id)
-    print(f"Successfully loaded font: {families[0]}")
-    
-    return families[0]
-    
+    if families:
+        print(f"Successfully loaded: {families[0]}")
+else:
+    print("Font failed to load. Check your .qrc path!")

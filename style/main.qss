@@ -43,3 +43,10 @@ QPushButton{
     margin-right: 10%;
 }
 
+#label_title, #label_request_dashboard{
+    font-family: "Playfair Display";
+}
+#label_request_dashboard{
+    font-size: large;
+}
+

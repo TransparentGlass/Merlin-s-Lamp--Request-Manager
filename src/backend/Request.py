@@ -3,15 +3,15 @@ import datetime
 from enum import Enum
 
 class StatusType(Enum):
-    ONGOING = "On-going"
-    UNREAD = "Unread"
-    FINISHED = "Finished"
+    Unread = 0
+    Working = 1
+    Finished = 2
     
 class Priority(Enum):
-    LOW = "LOW"
-    MEDIUM = "MEDIUM"
-    HIGH = "HIGH"
-    UNDEFINED = None
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
+    UNDEFINED = 0
     
 @dataclass
 class Request:
@@ -27,6 +27,7 @@ class Request:
     @property
     def formatted_date(self):
         return self.date.strftime("%d/%m/%y")
+    
     
     def get_priority(val):
         return Priority(val) if val is not None else Priority.LOW

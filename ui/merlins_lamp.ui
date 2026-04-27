@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
-    <height>662</height>
+    <width>820</width>
+    <height>635</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>820</width>
     <height>0</height>
    </size>
   </property>
@@ -26,14 +26,33 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>720</width>
+     <height>0</height>
+    </size>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="sign_in_Widget">
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item>
          <widget class="QFrame" name="frame_2">
           <property name="frameShape">
@@ -47,6 +66,7 @@
             <widget class="QLabel" name="label_title">
              <property name="font">
               <font>
+               <family>Segoe UI</family>
                <pointsize>28</pointsize>
               </font>
              </property>
@@ -60,22 +80,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Policy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item>
          <widget class="QFrame" name="frame_7">
@@ -219,14 +223,14 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_2">
+         <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>291</height>
+            <height>40</height>
            </size>
           </property>
          </spacer>
@@ -237,6 +241,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
          <widget class="QScrollArea" name="scrollArea_requestDashboard">
+          <property name="minimumSize">
+           <size>
+            <width>720</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -245,8 +255,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>838</width>
-             <height>581</height>
+             <width>782</width>
+             <height>554</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -273,6 +283,11 @@
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
                 <widget class="QLabel" name="label_request_dashboard">
+                 <property name="font">
+                  <font>
+                   <pointsize>16</pointsize>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>Requests Dashboard</string>
                  </property>
@@ -336,17 +351,52 @@
                  </property>
                  <item>
                   <property name="text">
-                   <string>High</string>
+                   <string>ALL</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Middle</string>
+                   <string>LOW</string>
                   </property>
                  </item>
                  <item>
                   <property name="text">
-                   <string>Low</string>
+                   <string>MEDIUM</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>HIGH</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_SortStatus">
+                 <property name="currentIndex">
+                  <number>-1</number>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Status</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>ALL</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Unread</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Working</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Finished</string>
                   </property>
                  </item>
                 </widget>
@@ -356,6 +406,16 @@
                  <property name="placeholderText">
                   <string>Request</string>
                  </property>
+                 <item>
+                  <property name="text">
+                   <string>ALL</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Feature</string>
+                  </property>
+                 </item>
                  <item>
                   <property name="text">
                    <string>Commission</string>
@@ -384,25 +444,10 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_SortStatus">
-                 <property name="placeholderText">
-                  <string>Status</string>
+                <widget class="QPushButton" name="btn_apply_filter">
+                 <property name="text">
+                  <string>Apply Filter</string>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>On-going</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Review</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Finished</string>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -482,7 +527,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>876</width>
+     <width>820</width>
      <height>22</height>
     </rect>
    </property>
