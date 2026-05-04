@@ -32,7 +32,7 @@
      <height>0</height>
     </size>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_6">
+   <layout class="QHBoxLayout" name="horizontalLayout_5">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
@@ -436,11 +436,6 @@
                    <string>Reccomendation</string>
                   </property>
                  </item>
-                 <item>
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </item>
                 </widget>
                </item>
                <item>
@@ -515,7 +510,7 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="RequestWidget">
+      <widget class="QWidget" name="RegisterPage">
        <layout class="QHBoxLayout" name="horizontalLayout_3"/>
       </widget>
      </widget>

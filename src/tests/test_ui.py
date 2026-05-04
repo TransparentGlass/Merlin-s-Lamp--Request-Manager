@@ -3,6 +3,8 @@ from backend.database import databaseManager
 from backend.Request import Request,Priority,StatusType
 from frontend.request_template import requestQFrame
 from datetime import datetime
+from frontend.register_page import RegisterPage
+from PyQt6.QtWidgets import QDialog
 
 
 @pytest.fixture
@@ -40,5 +42,17 @@ def test_request_template_updatePrio(qtbot, sample_requests, db_manager):
     
     
     
-
+def test_RegisterPage_init(qtbot):
+    widget = RegisterPage()
+    qtbot.addWidget(widget)
+    widget.show()
+    qtbot.wait(5000)
+    
+def test_RegisterPage_register(qtbot):
+    result = RegisterPage().exec()
+    final = False
+    
+    
+    assert result is QDialog.DialogCode.Accepted
+    
 

@@ -43,6 +43,10 @@ class databaseManager:
         except mysql.connector.Error as e:
             print(f"Integrity Error: {e}")
             return []
+        
+        except UnboundLocalError as e:
+            print(f"Cannot access database. Please turn on XAMPP")
+            return []
         finally:
             if conn.is_connected():
                 cursor.close()
@@ -70,7 +74,6 @@ class databaseManager:
         query = "INSERT INTO requests (title, content, request_type, user_id) VALUES (%s,%s,%s,%s)"
         params = (title, content, request_type, self.fetch_user_id(username))
         return self.execute_query(query, params)
-
     
     def fetch_requests(self, filter_prio = None, filter_status = None, filter_type = None) -> list[Request]:
         base_query = "SELECT * from requests"
@@ -111,12 +114,10 @@ class databaseManager:
                                  r.get('user_id'),
                                  r.get('id'))
             request_list.append(newRequest)
-            print(f"added request #{r}")
+            # print(f"added request #{r}")
             
         return request_list if request_list else None
     
-
-            
     def fetch_username(self, user_id) -> str:
         query = "Select (user_name) from users WHERE user_id = %s"
         params = (user_id, )
@@ -129,7 +130,6 @@ class databaseManager:
         result = self.fetch_one(query, params)
         return int(result['user_id']) if result else None
 
-    
     def update_priority(self, req_id: int, priority: Priority) -> bool:
         query = "UPDATE requests SET priority = %s WHERE id = %s limit 1"
         params = (priority.name, req_id)
@@ -156,7 +156,7 @@ class databaseManager:
         query = "Select 1 FROM users where user_name = %s limit 1"
         param = (username, )
         if self.fetch_one(query, param):
-            print("user exists, try another name to register")
+            # print("user exists, try another name to register")
             return False
         
         newpassword = password.encode('utf-8')
@@ -165,7 +165,7 @@ class databaseManager:
         query = "INSERT INTO users (user_name, password_hash) values (%s, %s)"
         param = (username, hashed)
         if self.execute_query(query, param):
-            print(f"Successfully signed in as {username}")
+            # print(f"Successfully signed in as {username}")
             return True
         return False
     
@@ -181,10 +181,10 @@ class databaseManager:
         stored_hash = result["password_hash"]
         
         if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
-            print(f"Welcome back, {username}!")
+            # print(f"Welcome back, {username}!")
             return True
         else:
-            print("Login failed: Incorrect password.")
+            # print("Login failed: Incorrect password.")
             return False
         
 # db = databaseManager()

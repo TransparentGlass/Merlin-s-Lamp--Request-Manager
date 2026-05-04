@@ -33,11 +33,7 @@ class RequestSubmission(QDialog):
             else: 
                 print("Submitted unsuccessfully")
                 self.reject()
-                
-                
-            
-            
-        
+
         else:
             print("Write everything")
         return

@@ -4,13 +4,13 @@ from frontend.request_submission import RequestSubmission
 from backend.Request import Request, Priority, StatusType
 from backend.database import databaseManager
 from frontend.request_template import requestQFrame 
+from frontend.register_page import RegisterPage
 
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-# outside src
-ROOT_DIR = ROOT.parent
-UI_DIR = ROOT_DIR / "ui"
+BASE_DIR = Path(__file__).resolve().parent #Current Directory SRC
+ROOT_DIR = BASE_DIR.parent #THE FOOL DIR
+UI_DIR =  ROOT_DIR / "ui"
 QSS_PATH = ROOT_DIR / "style" / "main.qss"
 
 class MyWindow(QMainWindow):
@@ -32,22 +32,20 @@ class MyWindow(QMainWindow):
         self.pushButton_add_request.clicked.connect(self.add_request)
         self.comboBox_SortPriority.currentTextChanged.connect(self.filter_Priority)
         self.comboBox_SortStatus.currentTextChanged.connect(self.filter_Status)
-        self.comboBox_SortRequest.currentTextChanged.connect(self.sort_RequestType)
+        self.comboBox_SortRequest.currentTextChanged.connect(self.filter_RequestType    )
         
         self.filter_type = None
         self.filter_prio = None
         self.filter_status = None
         
-         
-         
     def userRegister(self) -> bool:
-        self.username = self.lineEdit_username.text()
-        self.password = self.lineEdit_password.text()
-        if self.db.userRegister(self.username, self.password):
-            print("Successfully registered. Log in to account")
+        dialog = RegisterPage(self)
+        result = dialog.exec()
+        if result == QDialog.DialogCode.Accepted:
             return True
         
-        return False
+        
+        
     
     def userLogIn(self) -> bool:
         self.username = self.lineEdit_username.text()
@@ -63,7 +61,6 @@ class MyWindow(QMainWindow):
     def adminLogin(self): pass
             
     def add_request(self):
-        print("You are clicking request")
         dialog = RequestSubmission(self.username, self)    
         result = dialog.exec() 
     
@@ -94,8 +91,7 @@ class MyWindow(QMainWindow):
             self.load_request(requests)
         else:
             self.load_request()
-        
-            
+                  
     def clear_layout(self):
         layout = self.frame_allRequests.layout()
         while layout.count():
@@ -106,9 +102,7 @@ class MyWindow(QMainWindow):
     def apply_filter(self):
         newFiltered = self.db.fetch_requests(self.filter_prio, self.filter_status, self.filter_type)      
         self.update_requests(newFiltered)  
-                
-        
-        
+                      
     def filter_Priority(self):
         ui_text = self.comboBox_SortPriority.currentText().strip().upper()
         if ui_text != "ALL":
@@ -127,8 +121,7 @@ class MyWindow(QMainWindow):
             
         print(f"Sorting via Status {self.filter_status}")
         
-        
-    def sort_RequestType(self):
+    def filter_RequestType(self):
         ui_text = self.comboBox_SortRequest.currentText().strip()
         if ui_text != "ALL":
             self.filter_type = ui_text

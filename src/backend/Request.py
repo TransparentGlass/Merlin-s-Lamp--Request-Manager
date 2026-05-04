@@ -28,9 +28,3 @@ class Request:
     def formatted_date(self):
         return self.date.strftime("%d/%m/%y")
     
-    
-    def get_priority(val):
-        return Priority(val) if val is not None else Priority.LOW
-
-    def get_status(val):
-        return StatusType(val) if val is not None else StatusType.UNREAD
