@@ -22,7 +22,9 @@ class Request:
     content: str
     date: datetime
     authorID: int
+    upvotes: int
     requestID: int = None
+    
     
     @property
     def formatted_date(self):

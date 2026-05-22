@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Register</string>
+   <string>Register User</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>

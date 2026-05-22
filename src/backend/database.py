@@ -112,7 +112,9 @@ class databaseManager:
                                  r.get('content'),
                                  r.get('date'),
                                  r.get('user_id'),
-                                 r.get('id'))
+                                 r.get('upvote'),
+                                 r.get('id')
+                                 )
             request_list.append(newRequest)
             # print(f"added request #{r}")
             
@@ -138,7 +140,7 @@ class databaseManager:
             self.execute_query(query, params)
             return True
         except Exception as e:
-            print(f"Stoic Error: Database update failed: {e}")
+            print(f"Error: Database update failed: {e}")
             return False
     
     def update_status(self,req_id: int, status: StatusType) -> bool:
@@ -149,7 +151,7 @@ class databaseManager:
             self.execute_query(query, params)
             return True
         except Exception as e:
-            print(f"Stoic Error: Database update failed: {e}")
+            print(f"Error: Database update failed: {e}")
             return False
 
     def userRegister(self, username, password) -> bool:
@@ -186,6 +188,22 @@ class databaseManager:
         else:
             # print("Login failed: Incorrect password.")
             return False
+        
+    def upvote(self, id):
+        query = "UPDATE requests SET upvote = upvote + 1 WHERE id = %s"
+        param = (id,)
+        if self.execute_query(query, param):
+            return True
+        return False
+    
+    def undoVote(self, id):
+        query = "UPDATE requests SET upvote = upvote - 1 WHERE id = %s"
+        param = (id,)
+        if self.execute_query(query, param):
+            return True
+        return False
+        
+        
         
 # db = databaseManager()
 # db.fetch_requests()

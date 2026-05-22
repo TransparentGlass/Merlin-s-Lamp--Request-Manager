@@ -44,7 +44,7 @@ def test_priority_update_cycle(db_manager):
 def test_status_update_cycle(db_manager):
     # Arrange
     req_id = 20
-    new_status = StatusType.FINISHED
+    new_status = StatusType.Finished
     
     # Act
     success = db_manager.update_priority(req_id, new_status)
@@ -83,6 +83,19 @@ def test_userLogin_wrongPW(user, db_manager):
     success = db_manager.userLogin(username, password)
     
     assert success is False
+    
+def test_upvotes(db_manager):
+    id = 1
+    request = db_manager.fetch_one("SELECT (upvote) from requests WHERE id = %s", (id,))
+    prev = request.get('upvote')
+    db_manager.upvote(id)
+    
+    request = db_manager.fetch_one("SELECT (upvote) from requests WHERE id = %s", (id,))
+    new = request.get('upvote')
+    
+    assert new == prev + 1
+    
+    
     
 
 

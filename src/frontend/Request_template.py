@@ -16,6 +16,8 @@ class requestQFrame(QFrame):
         super().__init__(parent)
         uic.loadUi(UI_DIR / "request_template.ui", self)
         
+        self.upvoted = False
+        
         self.db = databaseManager()
         self.request = request
         self.label_date.setText(request.formatted_date)
@@ -24,6 +26,7 @@ class requestQFrame(QFrame):
         self.label_request_title.setText(request.title)
         self.label_request_type.setText(request.request_type)
         self.label_content.setText(request.content)
+        self.upvote_label.setText(str(request.upvotes))
         
         self.comboBox_AdminPriority.blockSignals(True)
         self.comboBox_AdminStatus.blockSignals(True)
@@ -43,6 +46,7 @@ class requestQFrame(QFrame):
         
         self.comboBox_AdminPriority.currentTextChanged.connect(self.updatePriority)
         self.comboBox_AdminStatus.currentTextChanged.connect(self.updateStatus)
+        self.pushButton_upvote.clicked.connect(self.upvote)
         
     def updatePriority(self):
         try:
@@ -63,6 +67,27 @@ class requestQFrame(QFrame):
         
         except ValueError:
             print(f"Status is not a valid Enum: {ValueError}")
+            
+    def upvote(self):
+        #if upvote false, upvote, else unupvote. Save it locally first and then save
+        if self.upvoted:
+            self.db.undoVote(self.request.requestID)
+            self.upvoted = False
+            self.request.upvotes -= 1
+            self.upvote_label.setText(str(self.request.upvotes))
+            return
+        
+        self.db.upvote(self.request.requestID)
+        self.upvoted = True
+        self.request.upvotes += 1
+        self.upvote_label.setText(str(self.request.upvotes))
+        return
+        
+        #update
+        
+        
+        
+        
         
         
         

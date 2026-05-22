@@ -85,6 +85,12 @@
          </property>
          <item>
           <widget class="QComboBox" name="comboBox_requestType">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
            <item>
             <property name="text">
              <string>Request Type</string>

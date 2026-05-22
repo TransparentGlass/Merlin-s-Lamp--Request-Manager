@@ -1,5 +1,5 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
+from PyQt6.QtWidgets import QDialog, QMessageBox
 from pathlib import Path
 from backend.database import databaseManager
 
@@ -27,15 +27,15 @@ class RequestSubmission(QDialog):
         
         if content and title and req_type.activated:
             if self.db.submit_request(title, content, req_type.currentText(), self.username):
-                print("Submitted successfully!")
+                QMessageBox.information(self, "Success", "Request is submitted!")
                 self.accept()
                 
             else: 
-                print("Submitted unsuccessfully")
+                QMessageBox.critical(self, "Unsuccessful submission", "Request did not get submitted.")
                 self.reject()
 
         else:
-            print("Write everything")
+            QMessageBox.warning(self, "Error", "Submission is not filled up completely.")
         return
     
     

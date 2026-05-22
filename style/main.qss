@@ -8,6 +8,10 @@ QPushButton{
     background-color: #660708;
 }
 
+QPushButton:checked{
+    background-color: darkblue;
+}
+
 #frame_request QFrame{
     background-color: #0B090A;
     
@@ -49,4 +53,6 @@ QPushButton{
 #label_request_dashboard{
     font-size: large;
 }
+
+
 

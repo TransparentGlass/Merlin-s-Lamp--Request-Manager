@@ -1,5 +1,5 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication
+from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication, QMessageBox
 from frontend.request_submission import RequestSubmission
 from backend.Request import Request, Priority, StatusType
 from backend.database import databaseManager
@@ -44,9 +44,6 @@ class MyWindow(QMainWindow):
         if result == QDialog.DialogCode.Accepted:
             return True
         
-        
-        
-    
     def userLogIn(self) -> bool:
         self.username = self.lineEdit_username.text()
         self.password = self.lineEdit_password.text()
@@ -56,6 +53,7 @@ class MyWindow(QMainWindow):
             self.showMaximized()
             return True
         
+        QMessageBox.warning(self, "Try again", "Wrong username or password")
         return False
     
     def adminLogin(self): pass
@@ -75,7 +73,7 @@ class MyWindow(QMainWindow):
             self.requests = self.db.fetch_requests()
             
         if not self.requests:
-            print("Request is empty or error")
+            QMessageBox.information(self, "Empty Requests", "There is no requests in the database.")
             return False;
         
         requests_frame = self.frame_allRequests.layout()
@@ -100,8 +98,12 @@ class MyWindow(QMainWindow):
                 child.widget().deleteLater()
                 
     def apply_filter(self):
-        newFiltered = self.db.fetch_requests(self.filter_prio, self.filter_status, self.filter_type)      
-        self.update_requests(newFiltered)  
+        newFiltered = self.db.fetch_requests(self.filter_prio, self.filter_status, self.filter_type)   
+        if newFiltered is None:
+            QMessageBox.warning(self, "No Results", "There are no results with the applied filter.") 
+        else:
+            self.update_requests(newFiltered)  
+            QMessageBox.information(self, "Applied filter", "Loading requested requests")
                       
     def filter_Priority(self):
         ui_text = self.comboBox_SortPriority.currentText().strip().upper()
@@ -129,6 +131,9 @@ class MyWindow(QMainWindow):
             self.filter_type = None
             
         print(f"Sorting via requestType {self.filter_type}")
+    
+     
+        
     
         
         

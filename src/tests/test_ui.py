@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QDialog
 
 @pytest.fixture
 def sample_requests():
-    return Request("Title test", "Feature", Priority.LOW, StatusType.ONGOING, "Test content", datetime.now(), "AJ", 20)
+    return Request("Title test", "Feature", Priority.LOW, StatusType.Unread, "Test content", datetime.now(), 1, 20, 20)
 
 @pytest.fixture
 def db_manager():
@@ -24,12 +24,13 @@ def test_request_template_init(qtbot, sample_requests):
     
     assert widget.label_date.text() == sample_requests.formatted_date
     assert widget.label_request_user.text() == "AJ"
-    assert widget.label_requestID.text() == str(20)
+    assert widget.label_requestID.text() == f'Request #{str(20)}'
     assert widget.label_request_title.text() == "Title test"
     assert widget.label_request_type.text() == "Feature"
     assert widget.label_content.text() == "Test content"
-    assert widget.comboBox_AdminPriority.currentText() == sample_requests.priority.value
-    assert widget.comboBox_AdminStatus.currentText() == sample_requests.status.value
+    assert widget.comboBox_AdminPriority.currentText() == sample_requests.priority.name
+    assert widget.comboBox_AdminStatus.currentText() == sample_requests.status.name
+    assert widget.upvote_label.text() == str(sample_requests.upvotes)
     
 def test_request_template_updatePrio(qtbot, sample_requests, db_manager):
     widget = requestQFrame(sample_requests,)
@@ -55,4 +56,13 @@ def test_RegisterPage_register(qtbot):
     
     assert result is QDialog.DialogCode.Accepted
     
-
+    
+def test_upvotes(qtbot, sample_requests):
+    widget = requestQFrame(sample_requests)
+    old = sample_requests.upvotes
+    qtbot.addWidget(widget)
+    widget.show()
+    qtbot.wait(10000)
+    
+    assert sample_requests.upvotes == old + 1
+    
