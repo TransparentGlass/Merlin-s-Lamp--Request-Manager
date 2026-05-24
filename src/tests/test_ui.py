@@ -1,7 +1,8 @@
 import pytest
 from backend.database import databaseManager
 from backend.Request import Request,Priority,StatusType
-from frontend.request_template import requestQFrame
+from frontend.RequestFrame import requestQFrame
+from frontend.admin_user_request_template import userQFrame,adminQFrame
 from datetime import datetime
 from frontend.register_page import RegisterPage
 from PyQt6.QtWidgets import QDialog
@@ -14,6 +15,18 @@ def sample_requests():
 @pytest.fixture
 def db_manager():
     return databaseManager()
+
+def test_userQframe(qtbot, sample_requests):
+    widget = userQFrame(sample_requests)
+    qtbot.addWidget(widget)
+    widget.show()
+    qtbot.wait(3000)
+    
+def test_adminQframe(qtbot, sample_requests):
+    widget = adminQFrame(sample_requests)
+    qtbot.addWidget(widget)
+    widget.show()
+    qtbot.wait(3000)
 
 def test_request_template_init(qtbot, sample_requests):
     widget = requestQFrame(sample_requests)
@@ -32,14 +45,14 @@ def test_request_template_init(qtbot, sample_requests):
     assert widget.comboBox_AdminStatus.currentText() == sample_requests.status.name
     assert widget.upvote_label.text() == str(sample_requests.upvotes)
     
-def test_request_template_updatePrio(qtbot, sample_requests, db_manager):
-    widget = requestQFrame(sample_requests,)
+def test_AdminUpdatePrio(qtbot, sample_requests):
+    widget = adminQFrame(sample_requests)
     qtbot.addWidget(widget)
     widget.show()
     qtbot.wait(10000)
     
-    assert widget.comboBox_AdminPriority.currentText() == Priority.MEDIUM.value
-    assert widget.comboBox_AdminStatus.currentText() == StatusType.FINISHED.value
+    assert widget.comboBox_AdminPriority.currentText() == Priority.MEDIUM.name
+    assert widget.comboBox_AdminStatus.currentText() == StatusType.Finished.name
     
     
     

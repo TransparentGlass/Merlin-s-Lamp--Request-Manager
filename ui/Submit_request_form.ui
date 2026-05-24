@@ -91,11 +91,9 @@
              <height>30</height>
             </size>
            </property>
-           <item>
-            <property name="text">
-             <string>Request Type</string>
-            </property>
-           </item>
+           <property name="placeholderText">
+            <string>Request Type</string>
+           </property>
            <item>
             <property name="text">
              <string>Feature</string>

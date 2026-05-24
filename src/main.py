@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QDialog, QMainWindow, QApplication, QMessageBox
 from frontend.request_submission import RequestSubmission
 from backend.Request import Request, Priority, StatusType
 from backend.database import databaseManager
-from frontend.request_template import requestQFrame 
+from frontend.admin_user_request_template import adminQFrame, userQFrame
 from frontend.register_page import RegisterPage
 
 from pathlib import Path
@@ -21,8 +21,14 @@ class MyWindow(QMainWindow):
         uic.loadUi(UI_DIR/"merlins_lamp.ui", self)
         self.stackedWidget.setCurrentIndex(0)
         
+        self.filter_type = None
+        self.filter_prio = None
+        self.filter_status = None
+        
+        self.adminAccess = False
+        
         self.db = databaseManager()
-        self.load_request()
+        
         
         self.pushButton_userLogIn.clicked.connect(self.userLogIn)
         self.pushButton_AdminSignIn.clicked.connect(self.adminLogin)
@@ -34,9 +40,7 @@ class MyWindow(QMainWindow):
         self.comboBox_SortStatus.currentTextChanged.connect(self.filter_Status)
         self.comboBox_SortRequest.currentTextChanged.connect(self.filter_RequestType    )
         
-        self.filter_type = None
-        self.filter_prio = None
-        self.filter_status = None
+       
         
     def userRegister(self) -> bool:
         dialog = RegisterPage(self)
@@ -50,13 +54,18 @@ class MyWindow(QMainWindow):
         if self.db.userLogin(self.username, self.password):
             print(f"welcome {self.username}")
             self.stackedWidget.setCurrentIndex(1)
-            self.showMaximized()
+            self.load_request()
+            
+            
             return True
         
         QMessageBox.warning(self, "Try again", "Wrong username or password")
         return False
     
-    def adminLogin(self): pass
+    def adminLogin(self): 
+        self.adminAccess = True
+        self.userLogIn()
+        
             
     def add_request(self):
         dialog = RequestSubmission(self.username, self)    
@@ -77,11 +86,20 @@ class MyWindow(QMainWindow):
             return False;
         
         requests_frame = self.frame_allRequests.layout()
+        
+        if self.adminAccess:
+            for r in self.requests:
             
-        for r in self.requests:
-            widget = requestQFrame(r, self)
-            requests_frame.addWidget(widget)
-        return True
+                widget = adminQFrame(r, self)
+                requests_frame.addWidget(widget)
+            return True
+        else:
+            for r in self.requests:
+            
+                widget = userQFrame(r, self)
+                requests_frame.addWidget(widget)
+            return True
+        
                   
     def update_requests(self, requests = None) -> bool:
         self.clear_layout()
@@ -131,6 +149,7 @@ class MyWindow(QMainWindow):
             self.filter_type = None
             
         print(f"Sorting via requestType {self.filter_type}")
+    
     
      
         

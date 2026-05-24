@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Merlin's Lamp</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">//border: 1px solid purple;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
     <size>
@@ -262,6 +265,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_14">
             <item>
              <widget class="QFrame" name="frame_sort_search">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="minimumSize">
                <size>
                 <width>0</width>
@@ -271,7 +280,7 @@
               <property name="maximumSize">
                <size>
                 <width>16777215</width>
-                <height>43</height>
+                <height>80</height>
                </size>
               </property>
               <property name="frameShape">
@@ -283,10 +292,14 @@
               <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
                 <widget class="QLabel" name="label_request_dashboard">
-                 <property name="font">
-                  <font>
-                   <pointsize>16</pointsize>
-                  </font>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">f</string>
                  </property>
                  <property name="text">
                   <string>Requests Dashboard</string>
@@ -314,7 +327,13 @@
               <property name="minimumSize">
                <size>
                 <width>0</width>
-                <height>30</height>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="frameShape">
@@ -325,124 +344,172 @@
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
-                <widget class="QComboBox" name="comboBox_SortPriority">
-                 <property name="placeholderText">
-                  <string>Priority</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>ALL</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>LOW</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>MEDIUM</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>HIGH</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_SortStatus">
-                 <property name="currentIndex">
-                  <number>-1</number>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Status</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>ALL</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Unread</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Working</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Finished</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_SortRequest">
-                 <property name="placeholderText">
-                  <string>Request</string>
-                 </property>
-                 <item>
-                  <property name="text">
-                   <string>ALL</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Feature</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Commission</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Problem Fix</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Request</string>
-                  </property>
-                 </item>
-                 <item>
-                  <property name="text">
-                   <string>Reccomendation</string>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="btn_apply_filter">
-                 <property name="text">
-                  <string>Apply Filter</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_3">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
+                <widget class="QFrame" name="frame_9">
+                 <property name="maximumSize">
                   <size>
-                   <width>40</width>
-                   <height>20</height>
+                   <width>800</width>
+                   <height>16777215</height>
                   </size>
                  </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_add_request">
-                 <property name="text">
-                  <string>+ Request</string>
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
                  </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                   <widget class="QComboBox" name="comboBox_SortPriority">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Priority</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>ALL</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>LOW</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>MEDIUM</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>HIGH</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_SortStatus">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="currentIndex">
+                     <number>-1</number>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Status</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>ALL</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Unread</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Working</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Finished</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="comboBox_SortRequest">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="placeholderText">
+                     <string>Request</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>ALL</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Feature</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Commission</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Problem Fix</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Request</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Reccomendation</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="btn_apply_filter">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>Apply Filter</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_3">
+                    <property name="orientation">
+                     <enum>Qt::Orientation::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_add_request">
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>40</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>+ Request</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>

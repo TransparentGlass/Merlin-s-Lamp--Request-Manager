@@ -12,9 +12,9 @@ ROOT_DIR = SRC_DIR.parent
 UI_DIR = ROOT_DIR / "ui"
 
 class requestQFrame(QFrame):
-    def __init__(self, request: Request, parent = None):
+    def __init__(self, request: Request, filepath, parent = None):
         super().__init__(parent)
-        uic.loadUi(UI_DIR / "request_template.ui", self)
+        self.ui = uic.loadUi(filepath, self)
         
         self.upvoted = False
         
@@ -28,45 +28,27 @@ class requestQFrame(QFrame):
         self.label_content.setText(request.content)
         self.upvote_label.setText(str(request.upvotes))
         
-        self.comboBox_AdminPriority.blockSignals(True)
-        self.comboBox_AdminStatus.blockSignals(True)
+        # self.comboBox_AdminPriority.blockSignals(True)
+        # self.comboBox_AdminStatus.blockSignals(True)
         
-        if self.request.priority is not None:
-            self.comboBox_AdminPriority.setCurrentIndex(self.request.priority.value)
-        else:
-            index = -1
+        # if self.request.priority is not None:
+        #     self.comboBox_AdminPriority.setCurrentIndex(self.request.priority.value)
+        # else:
+        #     index = -1
         
-        if self.request.status is not None:
-            self.comboBox_AdminStatus.setCurrentIndex(self.request.status.value)
-        else:
-            status_index = -1
+        # if self.request.status is not None:
+        #     self.comboBox_AdminStatus.setCurrentIndex(self.request.status.value)
+        # else:
+        #     status_index = -1
         
-        self.comboBox_AdminPriority.blockSignals(False)
-        self.comboBox_AdminStatus.blockSignals(False)
+        # self.comboBox_AdminPriority.blockSignals(False)
+        # self.comboBox_AdminStatus.blockSignals(False)
         
-        self.comboBox_AdminPriority.currentTextChanged.connect(self.updatePriority)
-        self.comboBox_AdminStatus.currentTextChanged.connect(self.updateStatus)
+        # self.comboBox_AdminPriority.currentTextChanged.connect(self.updatePriority)
+        # self.comboBox_AdminStatus.currentTextChanged.connect(self.updateStatus)
         self.pushButton_upvote.clicked.connect(self.upvote)
         
-    def updatePriority(self):
-        try:
-            newPrio = Priority[self.comboBox_AdminPriority.currentText()]
-            self.request.priority = newPrio
-            self.db.update_priority(self.request.requestID, newPrio)
-            print(f"Object Updated: ID {self.request.requestID} is now {newPrio}")
-        
-        except ValueError:
-            print(f"Priority is not a valid Enum: {ValueError}")
-            
-    def updateStatus(self):
-        try:
-            newStatus = StatusType[self.comboBox_AdminStatus.currentText()]
-            self.request.status = newStatus
-            self.db.update_status(self.request.requestID, newStatus)
-            print(f"Object Updated: ID {self.request.requestID} is now {newStatus}")
-        
-        except ValueError:
-            print(f"Status is not a valid Enum: {ValueError}")
+    
             
     def upvote(self):
         #if upvote false, upvote, else unupvote. Save it locally first and then save

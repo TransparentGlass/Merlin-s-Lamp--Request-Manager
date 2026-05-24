@@ -1,7 +1,7 @@
 import pytest
 from backend.database import databaseManager
 from backend.Request import Request, Priority, StatusType
-from frontend.request_template import requestQFrame
+from frontend.RequestFrame import requestQFrame
 from datetime import datetime
 
 @pytest.fixture

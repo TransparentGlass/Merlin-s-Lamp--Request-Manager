@@ -25,7 +25,7 @@ class RequestSubmission(QDialog):
         req_type =  self.comboBox_requestType
         
         
-        if content and title and req_type.activated:
+        if content and title and req_type.currentIndex() > -1:
             if self.db.submit_request(title, content, req_type.currentText(), self.username):
                 QMessageBox.information(self, "Success", "Request is submitted!")
                 self.accept()

@@ -2,6 +2,8 @@ from PyQt6.QtSql import QSqlDatabase, QSqlQuery
 import mysql.connector
 from backend.Request import Request, StatusType, Priority
 import bcrypt
+import logging
+
 
 
 
@@ -13,6 +15,7 @@ class databaseManager:
             'password': '',
             'database': 'merlinDB'
         }
+        logging.basicConfig(level=logging.ERROR)
     
     def execute_query(self, query, params=None):
         """A single point of failure/success for all write operations."""
@@ -26,30 +29,37 @@ class databaseManager:
             print(f"Integrity Error: {e}")
             return False
         finally:
-            if conn.is_connected():
+            if cursor:
                 cursor.close()
+            if conn and conn.is_connected():
                 conn.close()
                 
     def fetch_data(self, query, params=None):
         """A single point for all read operations."""
-        # Similar logic to execute_query but returns cursor.fetchall()
+        conn = None
+        cursor = None
+        
         try:
             conn = mysql.connector.connect(**self.config)
-            cursor = conn.cursor(dictionary=True    )
+            cursor = conn.cursor(dictionary=True)
             cursor.execute(query, params or ())
-            result = cursor.fetchall()
-            return result
+            return cursor.fetchall()
 
+        except mysql.connector.InterfaceError as e:
+            # This specifically catches connection failures (e.g., XAMPP is off)
+            logging.exception("Cannot access database. Please ensure XAMPP / MySQL is running.")
+            return []
+            
         except mysql.connector.Error as e:
-            print(f"Integrity Error: {e}")
+            # Catches other SQL issues (syntax errors, bad table names, etc.)
+            logging.error(f"Database operation failed: {e}")
             return []
-        
-        except UnboundLocalError as e:
-            print(f"Cannot access database. Please turn on XAMPP")
-            return []
+            
         finally:
-            if conn.is_connected():
+            # Safely check if variables were initialized and are open before closing
+            if cursor:
                 cursor.close()
+            if conn and conn.is_connected():
                 conn.close()
                 
     def fetch_one(self, query, params=None):
@@ -62,12 +72,16 @@ class databaseManager:
             result = cursor.fetchone()
             return result
 
+        except UnboundLocalError as e:
+            logging.exception("Cannot Access Database, Turn on XAMPP")
+            
         except mysql.connector.Error as e:
             print(f"Integrity Error: {e}")
             return None
         finally:
-            if conn.is_connected():
+            if cursor:
                 cursor.close()
+            if conn and conn.is_connected():
                 conn.close()
         
     def submit_request(self, title, content, request_type, username) -> bool:
@@ -183,10 +197,8 @@ class databaseManager:
         stored_hash = result["password_hash"]
         
         if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):
-            # print(f"Welcome back, {username}!")
             return True
         else:
-            # print("Login failed: Incorrect password.")
             return False
         
     def upvote(self, id):
@@ -202,6 +214,9 @@ class databaseManager:
         if self.execute_query(query, param):
             return True
         return False
+    
+    def deleteRequest(self, id):
+        query = ""
         
         
         
