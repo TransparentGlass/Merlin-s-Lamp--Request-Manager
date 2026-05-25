@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QDialog
+from PyQt6.QtWidgets import QMessageBox, QDialog
 from PyQt6 import uic
 from pathlib import Path
 from backend.database import databaseManager
@@ -56,6 +56,7 @@ class RegisterPage(QDialog):
         
         if self.db.userRegister(username, password):
             self.accept()
+            QMessageBox.information(self, "Success", "Successfully created an account! Please log in.")
             return True
             
     
