@@ -27,7 +27,7 @@ class MyWindow(QMainWindow):
         
         self.adminAccess = False
         
-        self.db = databaseManager()
+        self.db = databaseManager().setUp_database()
         
         
         self.pushButton_userLogIn.clicked.connect(self.userLogIn)

@@ -16,6 +16,15 @@ class databaseManager:
             'database': 'merlinDB'
         }
         logging.basicConfig(level=logging.ERROR)
+        
+    def setUp_database(self):
+        with open("src/backend/create_tables.sql", "r") as f:
+            sql_script = f.read()
+
+        # Split on ';' to run multiple statements, since execute() runs one at a time
+        for statement in sql_script.split(";"):
+            statement = statement.strip()
+            self.execute_query(statement)
     
     def execute_query(self, query, params=None):
         """A single point of failure/success for all write operations."""
